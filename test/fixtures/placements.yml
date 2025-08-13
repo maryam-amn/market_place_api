@@ -3,7 +3,9 @@
 one:
   order_id: 1
   product: one
+  quantity: 5
 
 two:
   order_id: 2
   product: two
+  quantity: 5

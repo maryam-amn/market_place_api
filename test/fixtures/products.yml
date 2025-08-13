@@ -5,15 +5,18 @@ one:
   price: 9.99
   published: false
   user_id: 1
+  quantity : 5
 
 two:
   title: Azos Zeenbok
   price: 9.99
   published: true
   user_id: 2
+  quantity : 5
 
 another_tv:
   title: Cheap TV
   price: 1000
   published: false
   user_id: 2
+  quantity: 5
