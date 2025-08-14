@@ -18,7 +18,7 @@ class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
         {product_id: products(:one).id, quantity: 2},
         {product_id: products(:two).id, quantity: 3},
       ]
-    }
+      }
     }
   end
   test 'should forbid orders for unlogged' do
@@ -32,11 +32,10 @@ class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     json_response = JSON.parse(response.body)
     assert_equal @order.user.orders.count, json_response['data'].count
-    
-    assert_not_nil json_response.dig('links', 'first')
-    assert_not_nil json_response.dig('links', 'last')
-    assert_not_nil json_response.dig('links', 'prev')
-    assert_not_nil json_response.dig('links', 'next')
+
+    assert_json_response_is_paginated json_response
+
+
   end
 
   test 'should forbid create order for unlogged' do
