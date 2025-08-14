@@ -8,15 +8,18 @@ class UserTest < ActiveSupport::TestCase
     user = User.new(email: "test@test.org", password_digest: "test")
     assert user.valid?
   end
+
   test "user with an invalid email should not be valid" do
     user = User.new(email: "test", password_digest: "test")
     assert_not user.valid?
   end
+
   test "user with a token email should be valid" do
     other_user = users(:one)
     user = User.new(email: other_user.email, password_digest: "test")
     assert_not user.valid?
-    end
+  end
+
   test "destroy user should destroy linked product" do
     assert_difference("Product.count", -1) do
       users(:one).destroy

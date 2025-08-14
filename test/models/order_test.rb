@@ -17,17 +17,15 @@ class OrderTest < ActiveSupport::TestCase
     ]
     @order.set_total!
     expected_total = (@product1.price * 2) + (@product2.price * 2)
-
     assert_equal expected_total, @order.total
-
   end
+
   test 'builds 2 placements for the order' do
 
     @order.build_placements_with_product_ids_and_quantities( [
        { product_id: @product1.id, quantity: 2 },
        { product_id: @product2.id, quantity: 3 },
     ])
-
     assert_difference('Placement.count', 2) do
       @order.save
     end

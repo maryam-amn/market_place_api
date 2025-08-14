@@ -19,7 +19,6 @@ class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil json_response.dig(:links, :next)
   end
 
-
   test "should create product" do
     assert_difference("Product.count") do
       post api_v1_products_url,
@@ -32,6 +31,7 @@ class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :created
   end
+
   test "should forbid create product" do
     assert_no_difference ("Product.count") do
       post api_v1_products_url,
@@ -49,6 +49,7 @@ class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
           as: :json
     assert_response :success
   end
+
   test "should forbid update product" do
     # Continuer ici
     patch api_v1_product_url(@product),
@@ -62,8 +63,8 @@ class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
       delete api_v1_product_url(@product),
            headers: { Authorization: JsonWebToken.encode(user_id: @product.user_id) },
            as: :json
-  end
-  assert_response :no_content
+      end
+    assert_response :no_content
   end
 
   test "Should forbid destroy product" do
@@ -72,7 +73,7 @@ class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
              headers: {
                Authorization: JsonWebToken.encode(user_id: users(:two).id) },
              as: :json
-    end
+      end
     assert_response :forbidden
   end
 end
